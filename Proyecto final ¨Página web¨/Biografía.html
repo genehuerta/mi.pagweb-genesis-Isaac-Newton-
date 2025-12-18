@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Biografía interactiva de Isaac Newton: El genio de la gravitación y la luz.">
+  <meta name="author" content="Genesis">
+  <title>Isaac Newton: El Genio de la Luz</title>
+  <style>
+    /* === PALETA DE COLORES NEBULOSA === */
+    :root { 
+      --space-bg: #050214; 
+      --accent: #ff00ff;   /* Magenta Neón */
+      --nebula-blue: #00d2ff; /* Cian Eléctrico */
+      --card-bg: rgba(20, 10, 40, 0.85); 
+      --text-gray: #f0f0f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { 
+      background-color: var(--space-bg); 
+      color: var(--text-gray); 
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      line-height: 1.6; 
+      overflow-x: hidden;
+    }
+
+    /* === FONDO DINÁMICO DE ESTRELLAS === */
+    #stars-container { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100vw; 
+      height: 100vh; 
+      z-index: -3; 
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, #1a0b35 0%, #050214 100%);
+    }
+    .star { 
+      position: absolute; 
+      background: white; 
+      border-radius: 50%; 
+      animation: twinkle var(--duration) infinite ease-in-out; 
+    }
+    @keyframes twinkle { 
+      0%, 100% { opacity: 0.3; transform: scale(1); } 
+      50% { opacity: 1; transform: scale(1.2); } 
+    }
+
+    /* === NAVEGACIÓN === */
+    .main-header { 
+      background: rgba(10, 5, 30, 0.9); 
+      padding: 1rem 0; 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+      border-bottom: 2px solid var(--accent);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+    }
+    .nav { 
+      display: flex; 
+      justify-content: space-between; 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 0 1.5rem;
+      align-items: center; 
+    }
+    .nav__logo { 
+      font-size: 1.5rem; 
+      font-weight: bold; 
+      color: var(--nebula-blue); 
+      text-decoration: none; 
+      text-shadow: 0 0 10px var(--nebula-blue);
+    }
+
+    /* === CONTENIDO PRINCIPAL === */
+    main { max-width: 900px; margin: 3rem auto; padding: 0 1.5rem; }
+    
+    .card { 
+      background: var(--card-bg); 
+      border: 1px solid rgba(0, 210, 255, 0.3); 
+      border-radius: 25px; 
+      padding: 3rem; 
+      backdrop-filter: blur(15px); 
+      box-shadow: 0 0 50px rgba(138, 43, 226, 0.3);
+    }
+
+    h1 { color: var(--accent); text-align: center; font-size: 3.5rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 15px rgba(255, 0, 255, 0.5); }
+    .quote { text-align: center; font-style: italic; color: var(--nebula-blue); margin-bottom: 2.5rem; display: block; font-size: 1.1rem; }
+
+    .section-title { 
+      color: var(--nebula-blue); 
+      margin-top: 2.5rem; 
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      border-left: 4px solid var(--accent); 
+      padding-left: 15px;
+    }
+
+    .highlight-box { 
+      background: rgba(0, 210, 255, 0.1); 
+      border-radius: 15px;
+      padding: 1.5rem; 
+      margin: 2rem 0; 
+      border-right: 4px solid var(--nebula-blue);
+    }
+    .highlight-box ol { padding-left: 1.2rem; }
+    .highlight-box li { margin-bottom: 0.8rem; }
+
+    /* === MULTIMEDIA === */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      margin: 2.5rem 0;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid var(--nebula-blue);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    .gallery-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+      gap: 1.5rem; 
+      margin-top: 3rem; 
+    }
+    .gallery-grid img { 
+      width: 100%; 
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px; 
+      border: 2px solid transparent;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .gallery-grid img:hover { 
+      transform: scale(1.05); 
+      border-color: var(--accent); 
+      box-shadow: 0 0 20px var(--accent); 
+    }
+
+    /* === BOTONES Y FOOTER === */
+    .cta-container { text-align: center; margin-top: 3rem; }
+    .btn-more { 
+      display: inline-block; 
+      padding: 1.2rem 2.8rem; 
+      background: linear-gradient(45deg, var(--accent), var(--nebula-blue)); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 50px; 
+      font-weight: bold; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease; 
+    }
+    .btn-more:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 10px 25px rgba(255, 0, 255, 0.5); 
+    }
+
+    .main-footer { 
+      text-align: center; 
+      padding: 4rem 1rem; 
+      margin-top: 4rem; 
+      background: rgba(10, 5, 30, 0.8);
+      border-top: 1px solid rgba(0, 210, 255, 0.2);
+    }
+    .footer__back { 
+      color: var(--nebula-blue); 
+      text-decoration: none; 
+      font-weight: bold; 
+      display: inline-block;
+      margin-top: 1rem;
+      transition: 0.3s;
+    }
+    .footer__back:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      .card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="stars-container"></div>
+
+<header class="main-header">
+  <nav class="nav">
+    <a href="#" class="nav__logo">⚛️ NEWTON VORTEX</a>
+    <div style="color: var(--nebula-blue); font-size: 0.85rem; letter-spacing: 1px;"> | CIENCIA | </div>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+    <h1>Isaac Newton</h1>
+    <span class="quote">"Si he logrado ver más lejos, ha sido porque me he alzado a hombros de gigantes."</span>
+
+    <h2 class="section-title">🍎 El Enigma de la Manzana</h2>
+    <p>En el verano de 1665, mientras huía de la Gran Peste en Londres, Newton observó una manzana caer en su jardín de Woolsthorpe. Este evento no fue un golpe en la cabeza, sino el inicio de una duda universal: <strong>¿Por qué los objetos caen siempre hacia abajo?</strong></p>
+    <p>Newton dedujo que la fuerza que atraía la manzana era la misma que mantenía a los planetas en sus órbitas, unificando por primera vez la física terrestre y la celeste.</p>
+    
+    
+
+    <h2 class="section-title">🔬 Las Tres Leyes de la Dinámica</h2>
+    <p>Su obra <em>Philosophiæ naturalis principia mathematica</em> cambió la humanidad al definir cómo se mueve todo en el cosmos:</p>
+    <div class="highlight-box">
+      <ol>
+        <li><strong>Inercia:</strong> Un cuerpo no cambia su estado a menos que una fuerza externa actúe sobre él.</li>
+        <li><strong>Fuerza (F = ma):</strong> La aceleración es proporcional a la fuerza e inversamente proporcional a la masa.</li>
+        <li><strong>Acción y Reacción:</strong> Por cada fuerza ejercida, existe otra igual pero en sentido opuesto.</li>
+      </ol>
+    </div>
+    
+    
+
+    <h2 class="section-title">🔮 Alquimista de Sombras</h2>
+    <p>Pocos saben que Newton dedicó más tiempo a la <strong>alquimia</strong> y la teología que a la física. En su laboratorio buscaba la "Piedra Filosofal" y estudió las dimensiones del Templo de Salomón para encontrar códigos numéricos divinos. Para él, el universo era un mensaje cifrado de Dios.</p>
+
+    <h2 class="section-title">🌈 La Anatomía de la Luz</h2>
+    <p>Usando un prisma en una habitación oscura, Newton demostró que la luz blanca es en realidad una mezcla de todos los colores visibles. Este hallazgo destruyó la creencia antigua de que el color era una propiedad de los objetos y no de la luz misma.</p>
+    
+    
+
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/S_8Vp9C5FkM" title="Las Leyes de Newton" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="cta-container">
+      <a href="https://historia.nationalgeographic.com.es/a/isaac-newton-cientifico-que-cambio-nuestra-comprension-universo_18804" class="btn-more" target="_blank">Explorar Archivos Originales</a>
+    </div>
+  </div>
+
+  <section class="gallery-grid">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/GodfreyKneller-IsaacNewton-1689.jpg" alt="Retrato clásico de Isaac Newton">
+    <img src="prisma.jpg" alt="Prisma">
+    <img src="telescopio.jpg" alt="Telescopio">
+  </section>
+</main>
+
+<footer class="main-footer">
+  <p>&copy; 2025 @GENESIS. Derechos reservados.</p>
+  <a href="pagina_web_Isaac-Newton.html" class="footer__back">← Volver al Portal de Inicio</a>
+</footer>
+
+<script>
+  // Generador de estrellas con efecto de parpadeo
+  const container = document.getElementById('stars-container');
+  const starCount = 140;
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 3 + 1 + 'px';
+    star.style.width = size;
+    star.style.height = size;
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+    container.appendChild(star);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vida, descubrimientos e influencia de Isaac Newton">
+  <title>Isaac Newton | Ciencia y Universo</title>
+  <link rel="stylesheet" href="Metodo_de_estudio.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+
+  
+</head>
+
+<body>
+
+  <!-- ESTRELLAS -->
+  <script>
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      document.body.appendChild(star);
+    }
+  </script>
+
+  <!-- HEADER -->
+  <header class="header">
+    <ul class="nav-menu">
+      <li><a href="Biografía.html" class="nav-link">Biografía</a></li>
+      <li><a href="#descubrimientos" class="nav-link">Descubrimientos</a></li>
+      <li><a href="Inspiraciones.html" class="nav-link">Inspiraciones</a></li>
+      <li><a href="#cta" class="nav-link">Explorar</a></li>
+    </ul>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container">
+      <div>
+        <h1 class="hero-title">Isaac Newton</h1>
+        <p class="hero-subtitle">El científico que explicó el universo</p>
+        <p class="hero-description">
+          Isaac Newton (1643–1727) fue un físico, matemático y astrónomo inglés.
+          Es considerado uno de los científicos más influyentes de todos los tiempos
+          y una figura clave de la Revolución Científica.
+        </p>
+        <a href="#descubrimientos" class="btn btn-primary">Descubrimientos</a>
+        <a href="Inspiraciones.html" class="btn btn-secondary">Inspiraciones</a>
+      </div>
+
+      <div class="hero-image">
+        <img src="metodo de estudio.jpg" alt="Isaac Newton">
+      </div>
+    </div>
+  </section>
+
+  <!-- DESCUBRIMIENTOS -->
+  <section id="descubrimientos" class="section">
+    <h2 class="section-title">Principales descubrimientos</h2>
+    <p class="section-subtitle">Aportes que transformaron la ciencia</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-arrows-alt feature-icon"></i>
+        <h3 class="feature-title">Leyes del movimiento</h3>
+        <p class="feature-text">
+          Estableció las tres leyes fundamentales que describen el movimiento de los cuerpos.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-globe feature-icon"></i>
+        <h3 class="feature-title">Gravitación universal</h3>
+        <p class="feature-text">
+          Explicó que todos los objetos del universo se atraen mediante la gravedad.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-rainbow feature-icon"></i>
+        <h3 class="feature-title">Óptica</h3>
+        <p class="feature-text">
+          Demostró que la luz blanca está compuesta por varios colores.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fas fa-square-root-alt feature-icon"></i>
+        <h3 class="feature-title">Cálculo</h3>
+        <p class="feature-text">
+          Desarrolló el cálculo diferencial e integral.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="section cta-section">
+    <h2 class="section-title">Legado eterno</h2>
+    <p class="section-subtitle">
+      Newton cambió para siempre la forma en que entendemos el universo
+    </p>
+    <a href="https://www.britannica.com/biography/Isaac-Newton" target="_blank" class="btn btn-primary">
+      Saber más
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 | Proyecto sobre Isaac Newton</p>
+    <a href="#">Inicio</a>
+    <a href="https://www.britannica.com/biography/Isaac-Newton" target="_blank">Historia</a>
+  </footer>
+
+</body>
+</html>
